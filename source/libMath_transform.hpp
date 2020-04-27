@@ -25,13 +25,26 @@
 #include "libMath_matrix.hpp"
 #include "libMath_vector.hpp"
 
-template<typename T> mat4<T> translate(const mat4<T> &_mat4, const vec4<T> &_transVec);
-template<typename T> mat4<T> translate(const vec4<T> &_transVec);
-template<typename T> mat4<T> scale(const mat4<T> &_mat4, const vec4<T> &_scaleVec);
-template<typename T> mat4<T> scale(const vec4<T> &_scaleVec);
-template<typename T> mat4<T> rotate(const mat4<T> &_mat4, const vec4<T> &_rotateVec);
-template<typename T> mat4<T> rotate(const vec4<T> &_rotateVec);
-template<typename T> mat4<T> orthographic(T _left, T _right, T _bottom, T _top, T _near, T _far);
-template<typename T> mat4<T> perspective(T _fov, T _aspect, T _near, T _far);
-template<typename T> mat4<T> perspective(T _fov, T _near, T _far);
-template<typename T> mat4<T> lookAt(vec3<T> _position, vec3<T> _target, vec3<T> _upVector);
+// templated versions
+template<typename T> mat4_t<T> translate(const mat4_t<T> &_mat4, const vec4_t<T> &_transVec);
+template<typename T> mat4_t<T> translate(const vec4_t<T> &_transVec);
+template<typename T> mat4_t<T> scale(const mat4_t<T> &_mat4, const vec4_t<T> &_scaleVec);
+template<typename T> mat4_t<T> scale(const vec4_t<T> &_scaleVec);
+template<typename T> mat4_t<T> rotate(const mat4_t<T> &_mat4, const vec4_t<T> &_rotateVec);
+template<typename T> mat4_t<T> rotate(const vec4_t<T> &_rotateVec);
+template<typename T> mat4_t<T> orthographic(T _left, T _right, T _bottom, T _top, T _near, T _far);
+template<typename T> mat4_t<T> perspective(T _fov, T _aspect, T _near, T _far);
+template<typename T> mat4_t<T> perspective(T _fov, T _near, T _far);
+template<typename T> mat4_t<T> lookAt(vec3_t<T> _position, vec3_t<T> _target, vec3_t<T> _upVector);
+
+// commonly used float32 versions
+mat4 translate(const mat4 &_mat4, const vec4 &_transVec);
+mat4 translate(const vec4 &_transVec);
+mat4 scale(const mat4 &_mat4, const vec4 &_scaleVec);
+mat4 scale(const vec4 &_scaleVec);
+mat4 rotate(const mat4 &_mat4, const vec4 &_rotateVec);
+mat4 rotate(const vec4 &_rotateVec);
+mat4 orthographic(float32 _left, float32 _right, float32 _bottom, float32 _top, float32 _near, float32 _far);
+mat4 perspective(float32 _fov, float32 _aspect, float32 _near, float32 _far);
+mat4 perspective(float32 _fov, float32 _near, float32 _far);
+mat4 lookAt(vec3 _position, vec3 _target, vec3 _upVector);

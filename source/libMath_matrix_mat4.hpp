@@ -32,7 +32,7 @@
     #include <iostream> // Used for test draw function
 
 template<typename T>
-struct mat4
+struct mat4_t
 {
     //--- Column major! ---
     static const uint32_t COLUMNS = 4;
@@ -40,10 +40,10 @@ struct mat4
     static const uint32_t SIZE    = COLUMNS * ROWS;
     
     // constructors and destructor
-    mat4(void) { for (size_t i = 0; i < ROWS; i++) for (size_t j = 0; j < COLUMNS; j++) data[j][i] = (i == j) ? 1.0f : 0.0f;}
-    mat4(int _s) { for (size_t i = 0; i < ROWS; i++) for (size_t j = 0; j < COLUMNS; j++) data[j][i] = (_s == 1) ? (i == j) ? 1.0f : 0.0f : _s; }
-    mat4(T _f) { for (size_t i = 0; i < ROWS; i++) for (size_t j = 0; j < COLUMNS; j++) data[j][i] = _f; }
-    mat4(T _f00, T _f10, T _f20, T _f30,
+    mat4_t(void) { for (size_t i = 0; i < ROWS; i++) for (size_t j = 0; j < COLUMNS; j++) data[j][i] = (i == j) ? 1.0f : 0.0f;}
+    mat4_t(int _s) { for (size_t i = 0; i < ROWS; i++) for (size_t j = 0; j < COLUMNS; j++) data[j][i] = (_s == 1) ? (i == j) ? 1.0f : 0.0f : _s; }
+    mat4_t(T _f) { for (size_t i = 0; i < ROWS; i++) for (size_t j = 0; j < COLUMNS; j++) data[j][i] = _f; }
+    mat4_t(T _f00, T _f10, T _f20, T _f30,
          T _f01, T _f11, T _f21, T _f31,
          T _f02, T _f12, T _f22, T _f32,
          T _f03, T _f13, T _f23, T _f33)
@@ -53,37 +53,37 @@ struct mat4
              data[2][0] = _f20; data[2][1] = _f21; data[2][2] = _f22; data[2][3] = _f23;
              data[3][0] = _f30; data[3][1] = _f31; data[3][2] = _f32; data[3][3] = _f33;
          }
-    ~mat4(void) { }
+    ~mat4_t(void) { }
     
     // operators
-    mat4& operator=(const mat4& _m) { for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] = _m.array[i]; return *this; }
-    mat4 operator+(const mat4& _m) const { mat4 _tMat4; for (size_t i = 0; i < COLUMNS * ROWS; i++) _tMat4.array[i] = _m.array[i] + array[i]; return _tMat4; }
-    void operator+=(const mat4& _m) { for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] += _m.array[i]; }
-    mat4 operator-(const mat4& _m) const { mat4 _tMat4; for (size_t i = 0; i < COLUMNS * ROWS; i++) _tMat4.array[i] = _m.array[i] - array[i]; return _tMat4; }
-    void operator-=(const mat4& _m) { for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] -= _m.array[i]; }
-    mat4 operator*(const T _s) const { mat4 _tMat4; for (size_t i = 0; i < COLUMNS * ROWS; i++) _tMat4.array[i] = array[i] * _s; return _tMat4; }
+    mat4_t& operator=(const mat4_t& _m) { for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] = _m.array[i]; return *this; }
+    mat4_t operator+(const mat4_t& _m) const { mat4_t _tMat4; for (size_t i = 0; i < COLUMNS * ROWS; i++) _tMat4.array[i] = _m.array[i] + array[i]; return _tMat4; }
+    void operator+=(const mat4_t& _m) { for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] += _m.array[i]; }
+    mat4_t operator-(const mat4_t& _m) const { mat4_t _tMat4; for (size_t i = 0; i < COLUMNS * ROWS; i++) _tMat4.array[i] = _m.array[i] - array[i]; return _tMat4; }
+    void operator-=(const mat4_t& _m) { for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] -= _m.array[i]; }
+    mat4_t operator*(const T _s) const { mat4_t _tMat4; for (size_t i = 0; i < COLUMNS * ROWS; i++) _tMat4.array[i] = array[i] * _s; return _tMat4; }
     void operator*=(const T _s) { for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] *= _s; }
-    mat4 operator*(const mat4& _m) const { mat4 _tMat4(0.0f); for(size_t i = 0; i < ROWS; i++) { for(size_t j = 0; j < COLUMNS; j++) { for(size_t k = 0; k < COLUMNS; k++) { _tMat4.data[i][j] += (data[i][k] * _m.data[k][j]); } } } return _tMat4; }
-    void operator*=(const mat4& _m) { mat4 _tMat4(0.0f); for(size_t i = 0; i < ROWS; i++) { for(size_t j = 0; j < COLUMNS; j++) { for(size_t k = 0; k < COLUMNS; k++) { _tMat4.data[i][j] += data[i][k] * _m.data[k][j]; } } } for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] = _tMat4.array[i]; }
-    vec4<T> operator*(const vec4<T>& _v) const { vec4<T> _tVec4(0.0f); for(size_t i = 0; i < ROWS; i++) { for(size_t j = 0; j < COLUMNS; j++) { _tVec4.array[i] += data[i][j] * _v.array[j]; } } return _tVec4; }
+    mat4_t operator*(const mat4_t& _m) const { mat4_t _tMat4(0.0f); for(size_t i = 0; i < ROWS; i++) { for(size_t j = 0; j < COLUMNS; j++) { for(size_t k = 0; k < COLUMNS; k++) { _tMat4.data[i][j] += (data[i][k] * _m.data[k][j]); } } } return _tMat4; }
+    void operator*=(const mat4_t& _m) { mat4_t _tMat4(0.0f); for(size_t i = 0; i < ROWS; i++) { for(size_t j = 0; j < COLUMNS; j++) { for(size_t k = 0; k < COLUMNS; k++) { _tMat4.data[i][j] += data[i][k] * _m.data[k][j]; } } } for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] = _tMat4.array[i]; }
+    vec4_t<T> operator*(const vec4_t<T>& _v) const { vec4_t<T> _tVec4(0.0f); for(size_t i = 0; i < ROWS; i++) { for(size_t j = 0; j < COLUMNS; j++) { _tVec4.array[i] += data[i][j] * _v.array[j]; } } return _tVec4; }
 
     // functions
     uint32 size(void) { return SIZE; }
     T determinant(void)
     {
-        mat3<T>  aMat3(0.0f);
+        mat3_t<T>  aMat3(0.0f);
         aMat3.setRC(data[1][1], data[1][2], data[1][3],
                     data[2][1], data[2][2], data[2][3],
                     data[3][1], data[3][2], data[3][3]);
-        mat3<T>  bMat3(0.0f);
+        mat3_t<T>  bMat3(0.0f);
         bMat3.setRC(data[1][0], data[1][2], data[1][3],
                     data[2][0], data[2][2], data[2][3],
                     data[3][0], data[3][2], data[3][3]);
-        mat3<T>  cMat3(0.0f);
+        mat3_t<T>  cMat3(0.0f);
         cMat3.setRC(data[1][0], data[1][1], data[1][3],
                     data[2][0], data[2][1], data[2][3],
                     data[3][0], data[3][1], data[3][3]);
-        mat3<T>  dMat3(0.0f);
+        mat3_t<T>  dMat3(0.0f);
         dMat3.setRC(data[1][0], data[1][1], data[1][2],
                     data[2][0], data[2][1], data[2][2],
                     data[3][0], data[3][1], data[3][2]);
@@ -96,10 +96,10 @@ struct mat4
         return det;
     }
     
-    mat4 inverse(void)
+    mat4_t inverse(void)
     {
         // Determinant
-        mat4 tMat4(0.0f);
+        mat4_t tMat4(0.0f);
         T det = determinant();
         if (det == 0)
         {
@@ -116,7 +116,7 @@ struct mat4
             for (size_t j = 0; j < COLUMNS; j++)
             {
                 uint32_t count = 0;
-                mat3<T>     tMat3(0.0f);
+                mat3_t<T>     tMat3(0.0f);
                 for (size_t k = 0; k < ROWS; k++)
                 {
                     for (size_t l = 0; l < COLUMNS; l++)
@@ -192,7 +192,7 @@ struct mat4
 //  -- internal test code ---
     void draw(void)
     {
-        std::cout << "--- mat4 ---" << std::endl;
+        std::cout << "--- mat4_t ---" << std::endl;
         for (size_t i = 0; i < COLUMNS * ROWS; i++)
         {
             std::cout << "[" << array[i] << "]";
@@ -204,6 +204,5 @@ struct mat4
 //
 
 };
-
 
 #endif // LIB_MATH_MATRIX_MAT4_HPP

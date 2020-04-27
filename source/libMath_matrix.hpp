@@ -28,4 +28,16 @@
 #include "libMath_matrix_mat3.hpp"
 #include "libMath_matrix_mat4.hpp"
 
+typedef mat2_t<float32> mat2;
+typedef mat2_t<float32> mat2f;
+typedef mat2_t<float64> mat2d;
+
+typedef mat3_t<float32> mat3;
+typedef mat3_t<float32> mat3f;
+typedef mat3_t<float64> mat3d;
+
+typedef mat4_t<float32> mat4;
+typedef mat4_t<float32> mat4f;
+typedef mat4_t<float64> mat4d;
+
 #endif // LIB_MATH_MATRIX_HPP

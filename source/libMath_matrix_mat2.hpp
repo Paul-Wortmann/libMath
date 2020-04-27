@@ -29,34 +29,34 @@
 #include "libMath_vector.hpp"
 
 template<typename T>
-struct mat2
+struct mat2_t
 {
     //--- Column major! ---
     static const uint32_t COLUMNS = 2;
     static const uint32_t ROWS    = 2;
-    mat2(void) { for (size_t i = 0; i < ROWS; i++) for (size_t j = 0; j < COLUMNS; j++) data[j][i] = (i == j) ? 1.0f : 0.0f;}
-    mat2(int _s) { for (size_t i = 0; i < ROWS; i++) for (size_t j = 0; j < COLUMNS; j++) data[j][i] = (_s == 1) ? (i == j) ? 1.0f : 0.0f : _s; }
-    mat2(T _f) { for (size_t i = 0; i < ROWS; i++) for (size_t j = 0; j < COLUMNS; j++) data[j][i] = _f; }
-    mat2(T _f00, T _f10,
+    mat2_t(void) { for (size_t i = 0; i < ROWS; i++) for (size_t j = 0; j < COLUMNS; j++) data[j][i] = (i == j) ? 1.0f : 0.0f;}
+    mat2_t(int _s) { for (size_t i = 0; i < ROWS; i++) for (size_t j = 0; j < COLUMNS; j++) data[j][i] = (_s == 1) ? (i == j) ? 1.0f : 0.0f : _s; }
+    mat2_t(T _f) { for (size_t i = 0; i < ROWS; i++) for (size_t j = 0; j < COLUMNS; j++) data[j][i] = _f; }
+    mat2_t(T _f00, T _f10,
          T _f01, T _f11)
          {
              data[0][0] = _f00; data[0][1] = _f01;
              data[1][0] = _f10; data[1][1] = _f11;
          }
-    ~mat2(void) { }
-    mat2& operator=(const mat2& _m) { for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] = _m.array[i]; return *this; }
-    mat2 operator+(const mat2& _m) const { mat2 _tMat2; for (size_t i = 0; i < COLUMNS * ROWS; i++) _tMat2.array[i] = _m.array[i] + array[i]; return _tMat2; }
-    void operator+=(const mat2& _m) { for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] += _m.array[i]; }
-    mat2 operator-(const mat2& _m) const { mat2 _tMat2; for (size_t i = 0; i < COLUMNS * ROWS; i++) _tMat2.array[i] = _m.array[i] - array[i]; return _tMat2; }
-    void operator-=(const mat2& _m) { for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] -= _m.array[i]; }
-    mat2 operator*(const T _s) const { mat2 _tMat2; for (size_t i = 0; i < COLUMNS * ROWS; i++) _tMat2.array[i] = array[i] * _s; return _tMat2; }
+    ~mat2_t(void) { }
+    mat2_t& operator=(const mat2_t& _m) { for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] = _m.array[i]; return *this; }
+    mat2_t operator+(const mat2_t& _m) const { mat2_t _tMat2; for (size_t i = 0; i < COLUMNS * ROWS; i++) _tMat2.array[i] = _m.array[i] + array[i]; return _tMat2; }
+    void operator+=(const mat2_t& _m) { for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] += _m.array[i]; }
+    mat2_t operator-(const mat2_t& _m) const { mat2_t _tMat2; for (size_t i = 0; i < COLUMNS * ROWS; i++) _tMat2.array[i] = _m.array[i] - array[i]; return _tMat2; }
+    void operator-=(const mat2_t& _m) { for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] -= _m.array[i]; }
+    mat2_t operator*(const T _s) const { mat2_t _tMat2; for (size_t i = 0; i < COLUMNS * ROWS; i++) _tMat2.array[i] = array[i] * _s; return _tMat2; }
     void operator*=(const T _s) { for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] *= _s; }
-    mat2 operator*(const mat2& _m) const { mat2 _tMat2(0.0f); for(size_t i = 0; i < ROWS; i++) { for(size_t j = 0; j < COLUMNS; j++) { for(size_t k = 0; k < COLUMNS; k++) { _tMat2.data[i][j] += data[i][k] * _m.data[k][j]; } } } return _tMat2; }
-    void operator*=(const mat2& _m) { mat2 _tMat2(0.0f); for(size_t i = 0; i < ROWS; i++) { for(size_t j = 0; j < COLUMNS; j++) { for(size_t k = 0; k < COLUMNS; k++) { _tMat2.data[i][j] += data[i][k] * _m.data[k][j]; } } } for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] = _tMat2.array[i]; }
+    mat2_t operator*(const mat2_t& _m) const { mat2_t _tMat2(0.0f); for(size_t i = 0; i < ROWS; i++) { for(size_t j = 0; j < COLUMNS; j++) { for(size_t k = 0; k < COLUMNS; k++) { _tMat2.data[i][j] += data[i][k] * _m.data[k][j]; } } } return _tMat2; }
+    void operator*=(const mat2_t& _m) { mat2_t _tMat2(0.0f); for(size_t i = 0; i < ROWS; i++) { for(size_t j = 0; j < COLUMNS; j++) { for(size_t k = 0; k < COLUMNS; k++) { _tMat2.data[i][j] += data[i][k] * _m.data[k][j]; } } } for (size_t i = 0; i < COLUMNS * ROWS; i++) array[i] = _tMat2.array[i]; }
 
-    vec2<T> operator*(const vec2<T>& _v) const 
+    vec2_t<T> operator*(const vec2_t<T>& _v) const 
     { 
-        vec2<T> _tVec2(0.0f); 
+        vec2_t<T> _tVec2(0.0f); 
         for(size_t i = 0; i < ROWS; i++) 
         { 
             for(size_t j = 0; j < COLUMNS; j++)
@@ -111,7 +111,7 @@ struct mat2
 /*  -- internal test code ---
     void draw(void)
     {
-        std::cout << "--- mat2 ---" << std::endl;
+        std::cout << "--- mat2_t ---" << std::endl;
         for (size_t i = 0; i < COLUMNS * ROWS; i++)
         {
             std::cout << "[" << array[i] << "]";

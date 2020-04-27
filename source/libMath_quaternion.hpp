@@ -34,12 +34,12 @@ struct quaternion
     static const uint32 SIZE = 4; // quaternion == 4
     union
     {
-        struct { T s = 0.0; vec3<T> v; };
+        struct { T s = 0.0; vec3_t<T> v; };
         struct { T array[SIZE]; };
     };
     
     // construnctors and destructor
-    quaternion(void) { this->s = 0.0; this->v = vec3<T>(0.0); }
+    quaternion(void) { this->s = 0.0; this->v = vec3_t<T>(0.0); }
     ~quaternion(void) = default;
     
     // opperators
