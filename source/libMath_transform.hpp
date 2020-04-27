@@ -25,13 +25,13 @@
 #include "libMath_matrix.hpp"
 #include "libMath_vector.hpp"
 
-mat4 translate(const mat4 &_mat4, const vec4 &_transVec);
-mat4 translate(const vec4 &_transVec);
-mat4 scale(const mat4 &_mat4, const vec4 &_scaleVec);
-mat4 scale(const vec4 &_scaleVec);
-mat4 rotate(const mat4 &_mat4, const vec4 &_rotateVec);
-mat4 rotate(const vec4 &_rotateVec);
-mat4 orthographic(float64 _left, float64 _right, float64 _bottom, float64 _top, float64 _near, float64 _far);
-mat4 perspective(float64 _fov, float64 _aspect, float64 _near, float64 _far);
-mat4 perspective(float64 _fov, float64 _near, float64 _far);
-mat4 lookAt(vec3 _position, vec3 _target, vec3 _upVector);
+template<typename T> mat4<T> translate(const mat4<T> &_mat4, const vec4<T> &_transVec);
+template<typename T> mat4<T> translate(const vec4<T> &_transVec);
+template<typename T> mat4<T> scale(const mat4<T> &_mat4, const vec4<T> &_scaleVec);
+template<typename T> mat4<T> scale(const vec4<T> &_scaleVec);
+template<typename T> mat4<T> rotate(const mat4<T> &_mat4, const vec4<T> &_rotateVec);
+template<typename T> mat4<T> rotate(const vec4<T> &_rotateVec);
+template<typename T> mat4<T> orthographic(T _left, T _right, T _bottom, T _top, T _near, T _far);
+template<typename T> mat4<T> perspective(T _fov, T _aspect, T _near, T _far);
+template<typename T> mat4<T> perspective(T _fov, T _near, T _far);
+template<typename T> mat4<T> lookAt(vec3<T> _position, vec3<T> _target, vec3<T> _upVector);

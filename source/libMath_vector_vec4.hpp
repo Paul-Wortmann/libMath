@@ -27,6 +27,7 @@
 #include "libMath_defines.hpp"
 #include "libMath_includes.hpp"
 
+template<typename T>
 struct vec4
 {
     static const uint32_t SIZE = 4;

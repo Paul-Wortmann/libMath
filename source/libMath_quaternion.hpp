@@ -21,17 +21,32 @@
  * @date 2020-04-23
  */
 
-#ifndef LIB_MATH_HPP
-#define LIB_MATH_HPP
+#ifndef LIB_MATH_QUATERNION_HPP
+#define LIB_MATH_QUATERNION_HPP
 
-#include "libMath_conversion.hpp"
 #include "libMath_defines.hpp"
 #include "libMath_includes.hpp"
-#include "libMath_matrix.hpp"
-#include "libMath_quaternion.hpp"
-#include "libMath_transform.hpp"
-#include "libMath_vector.hpp"
-#include "libMath_version.hpp"
 
-#endif //LIB_MATH_HPP
+template<typename T>
+struct quaternion
+{
+    // data structures, variables and constants
+    static const uint32 SIZE = 4; // quaternion == 4
+    union
+    {
+        struct { T s = 0.0; vec3<T> v; };
+        struct { T array[SIZE]; };
+    };
+    
+    // construnctors and destructor
+    quaternion(void) { this->s = 0.0; this->v = vec3<T>(0.0); }
+    ~quaternion(void) = default;
+    
+    // opperators
+
+    // functions
+    uint32 size(void) { return SIZE; }
+};
+
+#endif // LIB_MATH_QUATERNION_HPP
 

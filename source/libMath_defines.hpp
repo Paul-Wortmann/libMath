@@ -24,8 +24,18 @@
 #ifndef LIB_MATH_DEFINES_HPP
 #define LIB_MATH_DEFINES_HPP
 
-typedef float  float32;
-typedef double float64;
+#include <cstdint>
+
+typedef int16_t  int16;
+typedef int32_t  int32;
+typedef int64_t  int64;
+
+typedef uint16_t uint16;
+typedef uint32_t uint32;
+typedef uint64_t uint64;
+
+typedef float    float32;
+typedef double   float64;
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
